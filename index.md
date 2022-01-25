@@ -1,37 +1,21 @@
-## Welcome to GitHub Pages
+## Lab 1: Artemis
 
-You can use the [editor on GitHub](https://github.com/slawrence100/ece4960-fast-robots/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+### Downloading and Installing the Arduino IDE
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+I already had this installed on my computer from past projects, so I largely skipped this step. However, I tried installing this on VSCode (my favorite editor so far) and ran into [problems that would require a downgrade of my IDEs](https://arduino.stackexchange.com/questions/74881/error-messages-while-verifying-code-with-visual-studio-code). I chose to stick with the course instructions and use the official Arduino IDE, but I may look into better IDE options later if the coursework is intense enough that the work to install a better IDE would be worth it.
 
-### Markdown
+### Installing the Board Manager
+The installation is identical to the [supplied instructions](https://learn.sparkfun.com/tutorials/artemis-development-with-arduino?_ga=2.30055167.1151850962.1594648676-1889762036.1574524297&_gac=1.19903818.1593457111.Cj0KCQjwoub3BRC6ARIsABGhnyahkG7hU2v-0bSiAeprvZ7c9v0XEKYdVHIIi_-J-m5YLdDBMc2P_goaAtA4EALw_wcB), except any reference to the "Artemis board" should refer to the "Artemis Nano" board to reflect the class-supplied kit. Similarly, some of the [numbers of the examples](https://cei-lab.github.io/ECE4960-2022/Lab1.html) have changed, but their content remains the same.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Running the Blink example
+[![Blinking Artemis board](http://img.youtube.com/vi/nRJytdxLUBQ/0.jpg)](http://www.youtube.com/watch?v=nRJytdxLUBQ)
 
-```markdown
-Syntax highlighted code block
+### Running the Serial example
+[![Serial echo](http://img.youtube.com/vi/AUwepibuz5U/0.jpg)](http://www.youtube.com/watch?v=AUwepibuz5U)
 
-# Header 1
-## Header 2
-### Header 3
+### Running the AnalogRead example
+[![Temperature Readings](http://img.youtube.com/vi/58G1xj0QBhM/0.jpg)](http://www.youtube.com/watch?v=58G1xj0QBhM)
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/slawrence100/ece4960-fast-robots/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+### Running the Microphone example
+https://youtu.be/XpfZIsCII7w
+[![Serial echo](http://img.youtube.com/vi/XpfZIsCII7w/0.jpg)](http://www.youtube.com/watch?v=XpfZIsCII7w)
