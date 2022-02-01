@@ -6,6 +6,12 @@ title: Syd Lawrence takes Fast Robots
 This page describes myself and my lab work and ECE 4960: Fast Robots.
 Click on a link to learn more.
 
+## New Pages
+
+[Lab 1](https://slawrence100.github.io/ece4960-fast-robots/lab2)
+
+## Past Pages
+
 [About me](https://slawrence100.github.io/ece4960-fast-robots/about)
 
 [Lab 1](https://slawrence100.github.io/ece4960-fast-robots/lab1)
