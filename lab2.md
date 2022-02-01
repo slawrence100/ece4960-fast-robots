@@ -26,4 +26,5 @@ The notebook still didn't run when I tried (as my mac failed to connect to my Ar
 ![demo runs normally](lab02_photos/full-demo-notebook-OK.png)
 *At long last, everything works normally now*
 
-## Tasks 
+## Tasks
+![lab 2 tasks](lab02_photos/lab2-tasks.png)
