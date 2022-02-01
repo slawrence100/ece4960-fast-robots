@@ -32,6 +32,8 @@ The notebook still didn't run when I tried (as my mac failed to connect to my Ar
 
 # Lab Tasks
 
+These are all readable from this site, but I think [the GitHub preview](https://github.com/slawrence100/ece4960-fast-robots-code/blob/main/lab02/ble_python/lab02_tasks.ipynb) is prettier.
+
 ## Setup
 This code is ripped straight from the demo. It imports requirements and connects the board to the computer.
 
