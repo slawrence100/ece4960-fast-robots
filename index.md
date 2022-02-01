@@ -17,12 +17,19 @@ The installation is identical to the [supplied instructions](https://learn.spark
 ### Running the Blink example
 [![Blinking Artemis board](http://img.youtube.com/vi/nRJytdxLUBQ/0.jpg)](http://www.youtube.com/watch?v=nRJytdxLUBQ)
 
+See the video on YouTube [here](https://youtu.be/nRJytdxLUBQ)
+
 ### Running the Serial example
 [![Serial echo](http://img.youtube.com/vi/AUwepibuz5U/0.jpg)](http://www.youtube.com/watch?v=AUwepibuz5U)
+
+See the video on YouTube [here](https://youtu.be/AUwepibuz5U)
 
 ### Running the AnalogRead example
 [![Temperature Readings](http://img.youtube.com/vi/58G1xj0QBhM/0.jpg)](http://www.youtube.com/watch?v=58G1xj0QBhM)
 
+See the video on YouTube [here](https://youtu.be/58G1xj0QBhM)
+
 ### Running the Microphone example
-https://youtu.be/XpfZIsCII7w
 [![Serial echo](http://img.youtube.com/vi/XpfZIsCII7w/0.jpg)](http://www.youtube.com/watch?v=XpfZIsCII7w)
+
+See the video on YouTube [here](https://youtu.be/XpfZIsCII7w)
