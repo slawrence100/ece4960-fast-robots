@@ -4,6 +4,8 @@ title: Lab 2
 
 # Lab 2: Bluetooth Communication
 
+Key code snippets are on this site, but the complete files can be found on on [GitHub](https://github.com/slawrence100/ece4960-fast-robots-code/tree/main/lab02).
+
 ## Installation
 
 Before, I was running macOS Mojave 10.14, and the Artemis gave me its MAC address after uploading the sketch provided.
