@@ -182,18 +182,19 @@ ble.stop_notify(ble.uuid['RX_FLOAT'])
   1. *Receive a float value in Python using `receive_float()` on a characteristic that is defined as `BLEFloatCharactersitic` in the Arduino side*
   2. *Receive a float value in Python using `receive_string()` (and subsequently converting it to a float type in Python) on a characteristic that is defined as a `BLECStringCharactersitic` in the Arduino side*
 
+It's better to use Approach 1. `receive_float()` is named in a way to suggest it is designed to receive floating point numbers, and `receive_string()` is designed for strings. The naming implies there exists an API dictating what these functions do, and how it does it is left to the implementation that is not exposed to us. If someone were to optimize the implementations for each type, using the correct one (i.e. using `receive_float()` to receive floats as in Approach 1) would allow one to benefit from such an optimization, while Approach 2 does not receive the same benefits.
+
+To illustrate this principle, let's consider a possible implementation:
 
 Approach 1 receives the float by directly interpreting the byte array the Arduino sends as a floating-point value, likely according to IEEE 754.
 
-Approach 2 receives the "float" by receiving a string and interpreting that as a float by a character-wise conversion, which restricts one to sending numbers with a number of characters less or equal to the longest possible string one can send.
+Approach 2 (naively) receives the "float" by receiving a string and interpreting that as a float by a character-wise conversion, which restricts one to sending numbers with a number of characters less or equal to the longest possible string one can send.
 
-The main practical difference here is that using `receive_float()` in Approach 1 will allow one to express a far larger range of numbers than using `receive_string()` and converting afterwards given the same amount of data sent over Bluetooth. 
-
-Here's why:
+From this, we can conclude we can express more with the optimized Approach 1:
 - Assuming the Artemis is using a 32-bit single-precision floating point number, [one can express numbers from ±10^-38 to about ±3*10^38 to 7 decimal places](https://en.wikipedia.org/wiki/Single-precision_floating-point_format)
 - Each character of a string takes 8 bits, so we have at most 4 characters to work with. Assuming the string represents a human-readable number,
   - The maximum number we can represent is `"9999"`
   - The minimum number we can represent is `"-999"`
   - The smallest increment we can represent is `".001"`
 
-Based on these assumptions, it's better to use Approach 1.
+Based on these assumptions, it's better to use Approach 1. One could of course convert each byte character-wise to match the IEEE 754 data and send that as a string, but that would be needlessly complicated.
