@@ -39,6 +39,8 @@ I am also accustomed to using breadboards for most of my electronics work, but t
 
 ## Time of Flight Sensors
 
+See the Arduino code I wrote for this lab on [Github](https://github.com/slawrence100/ece4960-fast-robots-code/tree/main/lab03)
+
 After wiring and soldering everything, I ran a scan of the I2C bus:
 
 ![I2C scan shows weird results](lab03_photos/I2C-scan.png)
@@ -176,6 +178,8 @@ void loop(void)
 Just like the previous part, the I2C scan still shows many addresses because the ToF sensors are both on and using the same address. I once again went ahead and wrote code to collect data.
 
 To get the sensor to display data, I had to set `AD0_VAL` to 0 because the ADR jumper on the physical board is closed. I also altered [the printing function to print according to the format the Arduino IDE's built-in serial plotter expects](https://github.com/arduino/Arduino/blob/ba34eb640e5f6c2f8618debf61022f731c0eab74/build/shared/ArduinoSerialPlotterProtocol.md). Otherwise, this is just like the demo code for reading IMU data:
+
+See the Arduino code I wrote for this lab on [Github](https://github.com/slawrence100/ece4960-fast-robots-code/tree/main/lab03)
 
 ```cpp
 #include "ICM_20948.h" // Click here to get the library: http://librarymanager/All#SparkFun_ICM_20948_IMU
@@ -356,6 +360,8 @@ I then tested what happens at 90, 0, and -90 degrees, moving the sensor at each 
 The accelerometer is mostly accurate (within a degree or two), but its readings can be noisy.
 
 I also analyzed the frequency spectrum to figure out a low-pass filter cutoff frequency. Since the sensor reads every 30 ms (from the call to `delay()`), we can use that and the graphs below to determine a constant for a complementary low-pass filter. By the Nyquist-Shannon Sampling Theorem, we can only sample at most half as fast as the data is generated, which is why the maximum frequency listed is 16 Hz.
+
+To see exactly how these graphs were produced, see my [Jupyter notebook](https://github.com/slawrence100/ece4960-fast-robots-code/blob/main/lab03/fourier_transform.ipynb) and the [supporting data](https://github.com/slawrence100/ece4960-fast-robots-code/blob/main/lab03/screenshots/sensor-tap-angles.txt).
 
 ![pitch time domain](lab03_photos/pitch-time-domain.png)
 ![pitch frequency domain](lab03_photos/pitch-freq-domain.png)
