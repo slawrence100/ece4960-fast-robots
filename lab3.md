@@ -335,7 +335,9 @@ An issue arose when plotting where the same sensor variable (e.g. accelerometer 
 
 ![imu first test](lab03_photos/imu-first-test.png)
 
-TODO "Check out the change in sensor values as you rotate, flip, and accelerate the board. Explain what you see in both acceleration and gyroscope data."
+As I rotate, flip, and accelerate the sensor...
+- The acceleration changes in sharp bursts as I accelerate the sensor in various directions
+- The magnetometer and gyroscope have changing values when I rotate and flip the sensor
 
 ### Accelerometer
 
@@ -356,8 +358,40 @@ printFormattedFloat(atan2(sensor->accY(), sensor->accZ()) * 360 / (2 * M_PI),3,2
 SERIAL_PORT.print("\t");
 ```
 
-TODO show output at 90, 0, and -90 degrees
+I then tested what happens at 90, 0, and -90 degrees, moving the sensor at each step (which explains the large distrurbances in the graph - consider only the relatively-flat regions):
 
+#### Roll Test
+![Roll test angles are close](lab03_photos/roll-test.png)
+#### Pitch Test
+![Roll test angles are close](lab03_photos/pitch-test.png)
+
+The accelerometer is mostly accurate (within a degree or two), but its readings can be noisy.
+
+I also analyzed the frequency spectrum to figure out a low-pass filter cutoff frequency. Since the sensor reads every 30 ms (from the call to `delay()`), we can use that and the graphs below to determine a constant for a complementary low-pass filter.
+
+![pitch, time domain](lab03_photos/pitch-time-domain.png)
+
+![pitch, freq domain](lab03_photos/pitch-freq-domain.png)
+
+There's a spike at about 86 Hz, which makes our constant 0.2586. 
+
+![roll, time domain](lab03_photos/roll-time-domain.png)
+
+![roll, freq domain](lab03_photos/roll-freq-domain.png)
+
+This one is much less noisy, but some changes still happen at about 100 Hz, which makes our constant 0.23.
+
+TODO run with filter and see if it does anything useful
+
+TODO figure out what the fourier transform part really meant
 
 ### Gyroscope
-TODO write this
+
+Running the gyroscope with roll, pitch, and yaw equations produces this output when the gyro is held still:
+![gyro drift](lab03_photos/gyro-drift.png)
+
+Clearly, the gyroscope exhibits drift - that is, the angle tends to "slide" towards a certain direction instead of stay stable. This is because the noise from the gyroscope accumulates over time.
+
+TODO play with the sampling frequency
+
+TODO Use a complimentary filter to compute an estimate of pitch and roll which is both accurate and stable. Demonstrate its working range and accuracy, and that it is not susceptible to drift or quick vibrations.
