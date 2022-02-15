@@ -365,7 +365,7 @@ I also analyzed the frequency spectrum to figure out a low-pass filter cutoff fr
 The filter constants produced with this method were very high given pitch and roll cutoff frequencies of 8 and 10 Hz (respectively) for constants of 0.9993 and 0.9995 (respectively). This produced a graph that wasn't resistant to the small taps at all:
 
 ![constants too high](lab03_photos/constants-too-high.png)
-**This looks almost the same as when we didn't have a filter*
+*This looks almost the same as when we didn't have a filter!*
 
 
 Experimentation afterwards revealed that a constant of 0.05 fits much better to help resist small taps to the sensor (see left half) while still retaining large, "deliberate" motions (see right half). This tells me taht the noise frequencies are actually the lower frequencies, not the high ones.
