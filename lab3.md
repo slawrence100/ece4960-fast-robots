@@ -355,29 +355,27 @@ I then tested what happens at 90, 0, and -90 degrees, moving the sensor at each 
 
 The accelerometer is mostly accurate (within a degree or two), but its readings can be noisy.
 
-I also analyzed the frequency spectrum to figure out a low-pass filter cutoff frequency. Since the sensor reads every 30 ms (from the call to `delay()`), we can use that and the graphs below to determine a constant for a complementary low-pass filter.
+I also analyzed the frequency spectrum to figure out a low-pass filter cutoff frequency. Since the sensor reads every 30 ms (from the call to `delay()`), we can use that and the graphs below to determine a constant for a complementary low-pass filter. By the Nyquist-Shannon Sampling Theorem, we can only sample at most half as fast as the data is generated, which is why the maximum frequency listed is 16 Hz.
 
-![pitch, time domain](lab03_photos/pitch-time-domain.png)
+![pitch time domain](lab03_photos/pitch-time-domain.png)
+![pitch frequency domain](lab03_photos/pitch-freq-domain.png)
+![roll time domain](lab03_photos/roll-time-domain.png)
+![roll time domain](lab03_photos/roll-freq-domain.png)
 
-![pitch, freq domain](lab03_photos/pitch-freq-domain.png)
+The filter constants produced with this method were very high given pitch and roll cutoff frequencies of 8 and 10 Hz (respectively) for constants of 0.9993 and 0.9995 (respectively). This produced a graph that wasn't resistant to the small taps at all:
 
-There's a spike at about 86 Hz, which makes our constant 0.2586. 
+![constants too high](lab03_photos/constants-too-high.png)
+**This looks almost the same as when we didn't have a filter*
 
-![roll, time domain](lab03_photos/roll-time-domain.png)
 
-![roll, freq domain](lab03_photos/roll-freq-domain.png)
+Experimentation afterwards revealed that a constant of 0.05 fits much better to help resist small taps to the sensor (see left half) while still retaining large, "deliberate" motions (see right half). This tells me taht the noise frequencies are actually the lower frequencies, not the high ones.
 
-This one is much less noisy, but some changes still happen at about 100 Hz, which makes our constant 0.23.
-
-TODO run with filter and see if it does anything useful
-
-TODO figure out what the fourier transform part really meant
+![constant of 0.05 works really well](lab03_photos/accel-filter-OK.png)
 
 ### Gyroscope
 
 Running the gyroscope with roll, pitch, and yaw equations produces this output when the gyro is held still:
 ![gyro drift](lab03_photos/gyro-drift.png)
-**There are also more than 3 lines for only 3 values, which I believe is a bug in my Arduino IDE's serial plotter*
 
 
 Clearly, the gyroscope exhibits drift - that is, the angle tends to "slide" towards a certain direction instead of stay stable. This is because the noise from the gyroscope accumulates over time.
