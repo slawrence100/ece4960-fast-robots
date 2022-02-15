@@ -175,31 +175,18 @@ void loop(void)
 ### Setup
 Just like the previous part, the I2C scan still shows many addresses because the ToF sensors are both on and using the same address. I once again went ahead and wrote code to collect data.
 
-To get the sensor to display data, I had to set `AD0_VAL` to 0 because the ADR jumper on the physical board is closed. I also altered [the printing function to print according to the format the Arduino IDE's built-in serial plotter expects](https://github.com/arduino/Arduino/blob/ba34eb640e5f6c2f8618debf61022f731c0eab74/build/shared/ArduinoSerialPlotterProtocol.md):
+To get the sensor to display data, I had to set `AD0_VAL` to 0 because the ADR jumper on the physical board is closed. I also altered [the printing function to print according to the format the Arduino IDE's built-in serial plotter expects](https://github.com/arduino/Arduino/blob/ba34eb640e5f6c2f8618debf61022f731c0eab74/build/shared/ArduinoSerialPlotterProtocol.md). Otherwise, this is just like the demo code for reading IMU data:
 
 ```cpp
-/****************************************************************
- * Example1_Basics.ino
- * ICM 20948 Arduino Library Demo
- * Use the default configuration to stream 9-axis IMU data
- * Owen Lyke @ SparkFun Electronics
- * Original Creation Date: April 17 2019
- *
- * Please see License.md for the license information.
- *
- * Distributed as-is; no warranty is given.
- ***************************************************************/
 #include "ICM_20948.h" // Click here to get the library: http://librarymanager/All#SparkFun_ICM_20948_IMU
 
 #define SERIAL_PORT Serial
-#define WIRE_PORT Wire // Your desired Wire port.      Used when "USE_SPI" is not defined
-#define AD0_VAL 0      // The value of the last bit of the I2C address.                \
-                       // On the SparkFun 9DoF IMU breakout the default is 1, and when \
-                       // the ADR jumper is closed the value becomes 0
+#define WIRE_PORT Wire
+#define AD0_VAL 0
 
 #define PRINT_ACC // Uncomment to print accelerometer data
-//#define PRINT_GYR // Uncomment to print gyroscope data
-//#define PRINT_MAG // Uncomment to print magnetometer data
+#define PRINT_GYR // Uncomment to print gyroscope data
+#define PRINT_MAG // Uncomment to print magnetometer data
 
 ICM_20948_I2C myICM;
 
@@ -233,58 +220,39 @@ void setup()
   }
 }
 
-void loop()
-{
-
-  if (myICM.dataReady())
-  {
-    myICM.getAGMT();         // The values are only updated when you call 'getAGMT'                  
-    printScaledAGMT(&myICM); // This function takes into account the scale settings from when the measurement was made to calculate the values with units
+void loop() {
+  if (myICM.dataReady()){
+    myICM.getAGMT();
+    printScaledAGMT(&myICM);
     delay(30);
-  }
-  else
-  {
+  } else { 
     delay(500);
   }
 }
 
-void printFormattedFloat(float val, uint8_t leading, uint8_t decimals)
-{
+void printFormattedFloat(float val, uint8_t leading, uint8_t decimals) {
   float aval = abs(val);
-  if (val < 0)
-  {
+  if (val < 0) {
     SERIAL_PORT.print("-");
   }
-  else
-  {
-    SERIAL_PORT.print(" ");
-  }
-  for (uint8_t indi = 0; indi < leading; indi++)
-  {
+
+  for (uint8_t indi = 0; indi < leading; indi++){
     uint32_t tenpow = 0;
-    if (indi < (leading - 1))
-    {
+    if (indi < (leading - 1)){
       tenpow = 1;
     }
-    for (uint8_t c = 0; c < (leading - 1 - indi); c++)
-    {
+    for (uint8_t c = 0; c < (leading - 1 - indi); c++){
       tenpow *= 10;
     }
-    if (aval < tenpow)
-    {
+    if (aval < tenpow){
       SERIAL_PORT.print("0");
-    }
-    else
-    {
+    } else {
       break;
     }
   }
-  if (val < 0)
-  {
+  if (val < 0) {
     SERIAL_PORT.print(-val, decimals);
-  }
-  else
-  {
+  } else {
     SERIAL_PORT.print(val, decimals);
   }
 }
@@ -335,9 +303,29 @@ An issue arose when plotting where the same sensor variable (e.g. accelerometer 
 
 ![imu first test](lab03_photos/imu-first-test.png)
 
+However, there's a line in the demo code's printing function that includes an extra space. This extra space messes up the time series data that the Arduino tries to plot:
+```cpp
+void printFormattedFloat(float val, uint8_t leading, uint8_t decimals)
+{
+  float aval = abs(val);
+  if (val < 0)
+  {
+    SERIAL_PORT.print("-");
+  }
+  else
+  {
+    SERIAL_PORT.print(" "); // <-- This line should be removed
+  }
+```
+
+After removing that line, the results are more readable:
+
+![imu second test](lab03_photos/imu-second-test.png)
+
 As I rotate, flip, and accelerate the sensor...
 - The acceleration changes in sharp bursts as I accelerate the sensor in various directions
 - The magnetometer and gyroscope have changing values when I rotate and flip the sensor
+- All of the data has some noise associated with it
 
 ### Accelerometer
 
@@ -389,9 +377,13 @@ TODO figure out what the fourier transform part really meant
 
 Running the gyroscope with roll, pitch, and yaw equations produces this output when the gyro is held still:
 ![gyro drift](lab03_photos/gyro-drift.png)
+**There are also more than 3 lines for only 3 values, which I believe is a bug in my Arduino IDE's serial plotter*
+
 
 Clearly, the gyroscope exhibits drift - that is, the angle tends to "slide" towards a certain direction instead of stay stable. This is because the noise from the gyroscope accumulates over time.
 
-TODO play with the sampling frequency
+Decreasing the sampling frequency to 28 Hz (slower than 30 Hz to account for any sensor-caused delays) helps keep the gyroscope near the correct value of 0 degrees for each angle at first, but the drift still persists.
+
+![gyro drift at 28 hz](lab03_photos/gyro-drift-28hz.png)
 
 TODO Use a complimentary filter to compute an estimate of pitch and roll which is both accurate and stable. Demonstrate its working range and accuracy, and that it is not susceptible to drift or quick vibrations.
