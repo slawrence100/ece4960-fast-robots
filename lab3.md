@@ -384,4 +384,6 @@ Decreasing the sampling frequency to 28 Hz (slower than 30 Hz to account for any
 
 ![gyro drift at 28 hz](lab03_photos/gyro-drift-28hz.png)
 
-TODO Use a complimentary filter to compute an estimate of pitch and roll which is both accurate and stable. Demonstrate its working range and accuracy, and that it is not susceptible to drift or quick vibrations.
+I then used a complementary filter with constants of 0.05 (determined by experimentation, like the accelerometer) to help resist drift and quick vibrations while still showing motions that appear deliberate:
+
+![gyroscope with complementary filter](lab03_photos/gyro-comp-OK.png)
