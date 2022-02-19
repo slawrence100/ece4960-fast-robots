@@ -73,11 +73,19 @@ print(f"Distance (mm): {distances}")
 ```
 
 ## Test 1: Dimensions
-TODO write dimensions
-
+- 18 cm long
+- 14.2 cm wide
+- 8 cm tall
+- 8 cm wheel diameter
 
 ## Test 2: Battery Properties
-TODO write batter properties
+
+I spun the robot around continuously on a fully-charged battery, and it took **4 minutes and 35 seconds** for it to stop moving.
+
+The battery was noticibly warmer to the touch after this test.
+
+I also tried seeing how long it would take to charge the battery, and **it took over 1 hour and 30 minutes to charge completely**. This means lab testing done outside of the lab should be planned with care, as the battery will take a long time to charge.
+
 
 ## Test 3: Speed
 
