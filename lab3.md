@@ -4,6 +4,8 @@ title: Lab 3
 
 # Lab 3: Sensors
 
+[Click here to return to home page](https://slawrence100.github.io/ece4960-fast-robots/)
+
 ## Prelab
 
 The lab involved some things I wrote about before I came in:

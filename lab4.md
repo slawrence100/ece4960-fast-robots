@@ -4,6 +4,10 @@ title: Lab 4
 
 # Lab 4: Characterize Your Car
 
+[Click here to return to home page](https://slawrence100.github.io/ece4960-fast-robots/)
+
+Key code snippets are on this site, but the complete files can be found on on [GitHub](https://github.com/slawrence100/ece4960-fast-robots-code/tree/main/lab04)
+
 ## Prelab
 
 The prelab required a small amount of soldering to allow the Artemis battery to be plugged in. This became useful for testing later when I used the ToF sensor.

@@ -4,6 +4,8 @@ title: Lab 2
 
 # Lab 2: Bluetooth Communication
 
+[Click here to return to home page](https://slawrence100.github.io/ece4960-fast-robots/)
+
 Key code snippets are on this site, but the complete files can be found on on [GitHub](https://github.com/slawrence100/ece4960-fast-robots-code/tree/main/lab02).
 
 ## Installation

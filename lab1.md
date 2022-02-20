@@ -4,6 +4,8 @@ title: Lab 1 - Fast Robots
 
 ## Lab 1: Artemis
 
+[Click here to return to home page](https://slawrence100.github.io/ece4960-fast-robots/)
+
 ### Downloading and Installing the Arduino IDE
 
 I already had this installed on my computer from past projects, so I largely skipped this step. However, I tried installing this on VSCode (my favorite editor so far) and ran into [problems that would require a downgrade of my IDEs](https://arduino.stackexchange.com/questions/74881/error-messages-while-verifying-code-with-visual-studio-code). I chose to stick with the course instructions and use the official Arduino IDE, but I may look into better IDE options later if the coursework is intense enough that the work to install a better IDE would be worth it.
