@@ -8,6 +8,10 @@ title: Lab 4
 
 Key code snippets are on this site, but the complete files can be found on on [GitHub](https://github.com/slawrence100/ece4960-fast-robots-code/tree/main/lab04)
 
+![testing decorative photo](testing-splash.jpg)
+
+![testing decorative photo](testing-splash-2.jpg)
+
 ## Prelab
 
 The prelab required a small amount of soldering to allow the Artemis battery to be plugged in. This became useful for testing later when I used the ToF sensor.
@@ -81,6 +85,17 @@ print(f"Distance (mm): {distances}")
 - 14.2 cm wide
 - 8 cm tall
 - 8 cm wheel diameter
+- 518 gram weight
+  - including the car and its 850 mAh battery only
+  - 553 gram weight with Artemis, sensors, and Artemis battery
+
+I also worked with Linda Li ([view her site here](https://lyl24.github.io/lyl24-ece4960/lab4)) for other measurments, and her mesurements were similar:
+- 18 cm long
+- 14.2 cm wide
+- 8 cm tall
+- 14.2 cm chassis length
+- 7.3 cm chassis width
+- 5 cm chassis height
 
 ## Test 2: Battery Properties
 
@@ -90,9 +105,10 @@ The battery was noticibly warmer to the touch after this test.
 
 I also tried seeing how long it would take to charge the battery, and **it took over 1 hour and 30 minutes to charge completely**. This means lab testing done outside of the lab should be planned with care, as the battery will take a long time to charge.
 
+Once again, I worked with Linda to get more measurements in case my own battery was different. Her battery took **8 minutes and 11 seconds** for the robot to stop spinning, which means that either my battery wasn't fully charged or its capacity had already degraded compared to hers. She also had the experience of the battery taking a very long time to charge.
+
 
 ## Test 3: Speed
-
 I wrote this in a Jupyter notebook:
 
 ### Import Requirements
@@ -109,6 +125,8 @@ import matplotlib.pyplot as plt
 2. Place the car at one end of the hallway and run data collection to make sure you can see the end of the hall (3000+ mm)
 3. While collecting data, run the car as fast as you can towards the other end of the hall while avoiding crashes.
 
+#### The test track
+![test track](test-track.jpg)
 #### Data
 
 
@@ -208,3 +226,10 @@ From the brake tests:
 - The end position for speed is measured at the end of the graph and not the minimum, as **the car would tilt forward (angling the time-of-flight sensor at the floor) in order to stop.** 
 - It takes about **750 ms to come to a full stop.** This is counted from the time of minimum distance to the time the readings stabilize.
 
+
+## Test 4: Stunts
+
+I found out that **one can make the car flip** by driving quickly in one direction and then suddenly commanding the car to go the opposite direction. 
+- The friction of the wheels is large enough that it works on both relatively-smooth surfaces (like the lab classroom's tiling) and rougher ones (like the lecture classroom's carpet)
+- The car flips more slowly as it is driven more, so the battery is definitely a factor in which stunts one can do
+- While trying to make this happen, I found out that **driving the car with the remote has a limited amount of precision**. It was difficult to get the car to stop immediately without making it begin to flip over itself, and the turning felt jerky and uncontrolled.
