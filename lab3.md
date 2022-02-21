@@ -380,6 +380,24 @@ Experimentation afterwards revealed that a constant of 0.05 fits much better to 
 
 ![constant of 0.05 works really well](lab03_photos/accel-filter-OK.png)
 
+### Special Test: Changing the Digital Low-Pass Filter
+A notice [on EdStem](https://edstem.org/us/courses/17938/discussion/1154866) stated that one may not see a frequency spectrum suitable for use with a low-pass filter. I tried testing this as well:
+
+**Default Digital Low-Pass Filter**
+Using the default filter includes one with a 3db bandwidth of 246 hz and a Nyquist bandwidth of 265 hz
+![pitch angle, advanced, default settings](lab03_photos/advanced-pitch-1.png)
+![roll angle, advanced, default settings](lab03_photos/advanced-roll-1.png)
+
+**Modified Digital Low-Pass Filter**
+Using this code creates a filter with a 3 db bandwidth of 5.7 Hz and Nyquist bandwidth of 8.3 Hz.
+```cpp
+myDLPcfg.a = acc_d5bw7_n8bw3;
+```
+![pitch angle, advanced, default settings](lab03_photos/advanced-pitch-2.png)
+![roll angle, advanced, default settings](lab03_photos/advanced-roll-2.png)
+
+Both of these results yielded constants similar to the one above (about 0.95 for both angles)
+
 ### Gyroscope
 
 Running the gyroscope with roll, pitch, and yaw equations produces this output when the gyro is held still:
