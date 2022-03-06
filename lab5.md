@@ -45,6 +45,8 @@ The system seems to respond faster than the PWM, but the motors themselves appea
 ### Control Code
 To get this to work, I used the code below with slight modifications based on what I wanted the car to do (like calling different functions, varying power levels, etc).
 
+The lab code I wrote can also be found on ![my GitHub site](https://github.com/slawrence100/ece4960-fast-robots-code/tree/main/lab05)
+
 I also baked in a few delays to make sure I can let the robot stop, coast, or move out of the way before the robot started moving.
 
 ```cpp
