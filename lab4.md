@@ -8,9 +8,9 @@ title: Lab 4
 
 Key code snippets are on this site, but the complete files can be found on on [GitHub](https://github.com/slawrence100/ece4960-fast-robots-code/tree/main/lab04)
 
-![testing decorative photo](testing-splash.jpg)
+![testing decorative photo](lab04_photos/testing-splash.jpg)
 
-![testing decorative photo](testing-splash-2.jpg)
+![testing decorative photo](lab04_photos/testing-splash-2.jpg)
 
 ## Prelab
 
@@ -126,7 +126,7 @@ import matplotlib.pyplot as plt
 3. While collecting data, run the car as fast as you can towards the other end of the hall while avoiding crashes.
 
 #### The test track
-![test track](test-track.jpg)
+![test track](lab04_photos/test-track.jpg)
 #### Data
 
 
@@ -167,7 +167,7 @@ for run in speed_tests:
 
 
     
-![png](speed-graph.png)
+![png](lab04_photos/speed-graph.png)
     
 
 
@@ -210,7 +210,7 @@ for run in brake_tests:
 
 
     
-![png](brake-graph.png)
+![png](lab04_photos/brake-graph.png)
     
 
 
