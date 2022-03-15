@@ -78,7 +78,7 @@ All times in the following graphs are in milliseconds, and all distances in the 
 ![end result, run 1](lab06_photos/run3/run3.jpg)
 
 #### Run 4
-[![Run 4 Video](http://img.youtube.com/vi/a07Wd1iGDKc/0.jpg)](http://www.youtube.com/watch?v=J-4I9mYcd6c)
+[![Run 4 Video](http://img.youtube.com/vi/a07Wd1iGDKc/0.jpg)](http://www.youtube.com/watch?v=a07Wd1iGDKc)
 
 **Time of Flight Input**
 ![Run 1 time of flight input](lab06_photos/run4/tof.png)
