@@ -8,6 +8,8 @@ Click on a link to learn more.
 
 ## New Pages
 
+[Lab 6](https://slawrence100.github.io/ece4960-fast-robots/lab6)
+
 [Lab 5](https://slawrence100.github.io/ece4960-fast-robots/lab5)
 
 ## Past Pages
