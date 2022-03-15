@@ -34,8 +34,11 @@ PID_P = 0.05
 This isn't super readable - the graphs I will show later will explain what this means.
 
 ### Test Runs and Documentation
-I made four successful test runs. From each of these, **the maximum linear speed I was able to achieve was 1.4 m/s**. Tests in past labs saw a maximum speed of 2 m/s, but that also involved a longer distance than the 2 meters my room is limited to.
+I made four successful test runs. From each of these, **the maximum linear speed I was able to achieve was 1.4 m/s**. Tests in past labs saw a maximum speed of 2 m/s, but that also involved a longer distance than the 2 meters my room is limited to, so the maximum speed may not have been achieved because of a lack of distance to accelerate over.
 
+My code also allows one to specify the P-controller constant. From trial and error, I found that the best constant was 0.05.
+
+All times in the following graphs are in milliseconds, and all distances in the following graphs are in millimeters.
 
 #### Run 1
 
@@ -89,7 +92,7 @@ I made four successful test runs. From each of these, **the maximum linear speed
 ### Frequency
 The standard for a control loop is to calculate much faster than the system moves, but I am limited by how fast the sensor can read, which is about 20 Hz. Rather than let the robot move fast and crash more often, I chose to use a smaller proportional constant to compensate for the lack of accurate and frequent sensor data. I also sent all of the sensor and debugging data *after* the entire run was made in order to avoid any processing delays from sending data over Bluetooth.
 
-From the graphs I got from the four successful test runs I did, I chose not to update the range and sampling times outside of their defaults.
+From the graphs I got from the four successful test runs I did, I chose not to update the range and sampling times outside of their defaults. The graphs all end at about 300 mm, so the car may miss its target of 300 mm because of sensor noise.
 
 ### Deadband
 With a motor calibration factor of 2 and a deadband around 40, **my motors have a range of values from 40 to 127.** The PID controller might not stay within that range, so I wrote a short function to clip its output to that range of values:
@@ -98,6 +101,7 @@ With a motor calibration factor of 2 and a deadband around 40, **my motors have 
 #define MIN_POWER 40
 #define MAX_POWER 127
 #define COAST_POWER 10
+
 int clip_motor_value(float val_in) {
   if (val_in >= MAX_POWER){
     return MAX_POWER;
@@ -109,7 +113,7 @@ int clip_motor_value(float val_in) {
 ```
 
 ### Anything Goes
-In addition to accounting for the deadband, I know that 40 is a large amount to clip the motor output by. Since there's sometimes use for a motor to keep moving at relatively low speeds, my code includes a "hack" statement to *coast* to a stop instead of constantly using a hard brake.
+Clipping the motor speed can lead to stopping too early. Since this presents a need for a motor to keep moving at relatively low speeds, my code includes a "hack" statement to *coast* to a stop instead of constantly using a hard brake.
 
 ```cpp
 if (motor_power >= MIN_POWER) {
@@ -158,6 +162,27 @@ while (central.connected()) {
 ```
 The full control code (and corresponding notebook) can be found in [my GitHub repository](https://github.com/slawrence100/ece4960-fast-robots-code/tree/main/lab06).
 
+### Other Considerations
 
+#### Integrator Wind-Up
+Although I didn't use an integral-based controller, I would likely have to deal with integrator windup had I used it. Integrator wind-up can cause my car to overshoot, which means it could crash into the wall. To avoid it, I would need to clip the output similar to how I did with the motor power.
 
+#### Derivative LPF and Kick
+Although I didn't use a derivative-based controller, I would likely have included a low-pass filter had I used one. The derivative controller will amplify any large errors, especially at the beginning (i.e. a derivative kick caused by a change from an initial setpoint to the 300mm specified), so it becomes necessary to limit the influence the derivative has on the final control output. This may also come in handy for when I must change the setpoint when the car does a flip in later labs.
 
+### Range of the P-Controller Constant
+To help estimate what the P-controller constant should be, we should consider the range of other factors:
+- The distances are all in millimeters
+- The motor responds from inputs between 40 and 127
+- The car's max speed is about 2000 mm/s, which should correspond to something close to 127 (but doesn't because of the scaling factor - 2 m/s was tested when the car still had its remote and no controls to ensure straight-line driving)
+- The farthest the sensor can read is about 4000 mm
+
+So, we can solve for the p-controller constant: 127 = p * 4000.
+
+This gives us a minimum of p = 0.03175. In reality, we'll want something higher because we will likely be closer than 4 meters away from our setpoint.
+
+If we assume we can accept 10 mm of error from our controller, we can solve for the greatest value of our p-controller constant: 40 = p * 10.
+
+This gives us a maximum of 0.25. In reality, we'll want something lower; this number will cause much more aggressive acceleration that's prone to overshooting.
+
+Given both of these estimates, we'll want to choose a constant closer to the minimum to avoid overshooting (at the expense of speed), which is why my choice of 0.05 seems reasonable.
