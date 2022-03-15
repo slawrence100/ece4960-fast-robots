@@ -127,6 +127,8 @@ if (motor_power >= MIN_POWER) {
 
 Although this makes where my robot will stop a little less predictable than a controlled, slow movement, the limited battery capacity (and variability that causes) makes slow, powered movement more difficult than adding this coasting feature.
 
+The runs that are past the first run also had an odd quirk where the motors took some time to properly "get going" at full speed. I wasn't able to find a fix for this in time for the submission deadline, but I might have been able to add a "boost" to the controller's output for the first few timesteps to help overcome that delay.
+
 ### Controller Code
 The main loop now includes some code I wrote to collect data as it goes and do P-control if that has been activated.
 
