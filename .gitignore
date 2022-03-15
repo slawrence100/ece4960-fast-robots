@@ -1,4 +1,4 @@
 
 .DS_Store
 # videos should all be on Youtube anyways
-.MOV
+*.MOV

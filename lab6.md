@@ -13,8 +13,10 @@ To help debug my system and collect data, I have a mechanism to start and stop d
 4. Bluetooth sends the command over to the robot
 5. The robot updates a variable that alters its `loop()` to store time of flight values and times in an array.
 6. The robot is tasked with doing something with more commands from `RobotControl`. In this lab, that is running PID to not hit a wall.
-7. The notebook calls `RobotControl.start_pid()`, which tries to get the robot to get 300mm away from a wall without hitting it. For debugging purposes, it also records the motor input values that come out of the PID controller's computations.
+7. The notebook calls `RobotControl.start_pid()`, which tries to get the robot to get 300mm away from a wall without hitting it. For debugging purposes, it also records the motor input values that come out of the PID controller's computations. These values are stored in an array with fixed length for sending back later.
 8. At some point, the Python notebook calls `RobotControl.stop_data_collection()`, which tells the bot to stop storing data and sends back what it has collected all at once. To avoid making too many Bluetooth characteristics to keep track of, I push a sensor reading along with its timestamp to the same characteristic and separate the list out in Python later.
+
+The notebook I used to run this with is similar to the template - my implementation can be found [here](https://github.com/slawrence100/ece4960-fast-robots-code/blob/main/lab06/robot_pid.ipynb)
 
 ## Lab Tasks
 
@@ -32,8 +34,8 @@ PID_P = 0.05
 This isn't super readable - the graphs I will show later will explain what this means.
 
 ### Test Runs and Documentation
-I made four successful test runs. From each of these, **the maximum linear speed I was able to achieve was ___ m/s**.
-TODO write about max linear speed here
+I made four successful test runs. From each of these, **the maximum linear speed I was able to achieve was 1.4 m/s**. Tests in past labs saw a maximum speed of 2 m/s, but that also involved a longer distance than the 2 meters my room is limited to.
+
 
 #### Run 1
 
@@ -64,13 +66,13 @@ TODO write about max linear speed here
 [![Run 3 Video](http://img.youtube.com/vi/lt0hfkXV8lY/0.jpg)](http://www.youtube.com/watch?v=lt0hfkXV8lY)
 
 **Time of Flight Input**
-![Run 1 time of flight input](lab06_photos/run4/tof.png)
+![Run 1 time of flight input](lab06_photos/run3/tof.png)
 
 **Control Loop Output**
-![PID output](lab06_photos/run4/pid.png)
+![PID output](lab06_photos/run3/pid.png)
 
 **End Result: 40 cm**
-![end result, run 1](lab06_photos/run4/run4.jpg)
+![end result, run 1](lab06_photos/run3/run3.jpg)
 
 #### Run 4
 [![Run 4 Video](http://img.youtube.com/vi/a07Wd1iGDKc/0.jpg)](http://www.youtube.com/watch?v=J-4I9mYcd6c)
@@ -85,7 +87,7 @@ TODO write about max linear speed here
 ![end result, run 1](lab06_photos/run4/run4.jpg)
 
 ### Frequency
-The standard for a control loop is to calculate much faster than the system moves, but I am limited by how fast the sensor can read, which is about 20 Hz. Rather than let the robot move fast and crash more often, I chose to use a smaller proportional constant to compensate for the lack of accurate and frequent sensor data.
+The standard for a control loop is to calculate much faster than the system moves, but I am limited by how fast the sensor can read, which is about 20 Hz. Rather than let the robot move fast and crash more often, I chose to use a smaller proportional constant to compensate for the lack of accurate and frequent sensor data. I also sent all of the sensor and debugging data *after* the entire run was made in order to avoid any processing delays from sending data over Bluetooth.
 
 From the graphs I got from the four successful test runs I did, I chose not to update the range and sampling times outside of their defaults.
 
@@ -154,7 +156,7 @@ while (central.connected()) {
       }
     }
 ```
-
+The full control code (and corresponding notebook) can be found in [my GitHub repository](https://github.com/slawrence100/ece4960-fast-robots-code/tree/main/lab06).
 
 
 
