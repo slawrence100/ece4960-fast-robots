@@ -177,3 +177,29 @@ def kf(mu_prev,sigma_prev,u,y):
 
     return mu,sigma
 ```
+
+After fixing an error with my code (I incorrectly scaled my motor input), I got this graph:
+```
+sampling_rate=13.2
+sigma_1=0.363318042491699 m, sigma_2=0.0363318042491699 m/s, sigma_4=0.025 m
+d=0.374251497005988, m=0.22754950399122473, rise time=1.4 s
+Sigma_u:[[0.132   0.     ]
+ [0.      0.00132]]
+Sigma_z:[[0.000625]]
+A: [[ 0.          1.        ]
+ [ 0.         -1.64470364]]
+B: [[0.        ]
+ [4.39464812]]
+C: [[-1  0]]
+delta_t: 0.07575757575757576
+A_d: [[1.         0.07575758]
+ [0.         0.87540124]]
+B_d: [[0.        ]
+ [0.33292789]]
+ mu_0: [[3.06]
+ [0.  ]]
+sigma_0: [[0.36331804 0.        ]
+ [0.         0.        ]]
+```
+
+![final kf try](lab07_photos/kf_data_3.png)
