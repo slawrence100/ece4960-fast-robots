@@ -202,6 +202,6 @@ sigma_0: [[0.36331804 0.        ]
 
 ![final kf try](lab07_photos/kf_data_3.png)
 
-Although it looks like the Kalman Filter did little to the the position readings, the velocity plot seems much more reasonable with the Kalman filter than without. Both still have regions of relatively large errors, but the Kalman Filter's velocities that occur near 0 are far more reasonable and frequent than the ones from the ToF data alone.
+Although it looks like the Kalman Filter did little to the the position readings, the velocity plot seems smoother with the Kalman filter than without, although both still have large errors from the observed maximum speed of about 2 m/s.
 
 ![kf velocity](lab07_photos/kf_data_vel.png)
