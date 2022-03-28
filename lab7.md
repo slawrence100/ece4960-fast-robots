@@ -12,7 +12,6 @@ To get the step response, I wrote some code that would drive the robot into a wa
 Arduino (in `loop()`):
 ```cpp
 if (use_step_response) {
-  // Again, use backwards-facing ToF
   motor_power = clip_motor_value(255);
   if (current_tof_front <= step_stop) {
     motor_power = 0;
@@ -20,8 +19,7 @@ if (use_step_response) {
   } else {
     move_forward(motor_power);
   }
-  pid_motor_power[pid_motor_power_idx] = motor_power;
-  pid_motor_power_idx++;
+  // log motor power, code omitted here
 }
 ```
 
@@ -144,7 +142,7 @@ This new plot is more consistent with my observed results - when trying this, th
 Most of the code is the same from lecture and lab handouts, but I made one minor change - in the given `kf()` code, I had to change the dimention of the identiy matrix because my state space is 2 by 1 (and not 3 by 1)
 
 ```python
-sampling_rate = len(tof_times) / 2.5
+sampling_rate = len(tof_times) / 2.5 # ran for 2.5 seconds, see notebook code
 sigma_1 = np.sqrt(0.1**2 * sampling_rate) # Trust in modeled position
 sigma_2 = np.sqrt(0.01**2 * sampling_rate) # Trust in modeled speed
 sigma_4 = 0.025 # measurement noise
