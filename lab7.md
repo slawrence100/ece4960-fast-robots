@@ -205,3 +205,31 @@ sigma_0: [[0.36331804 0.        ]
 Although it looks like the Kalman Filter did little to the the position readings, the velocity plot seems smoother with the Kalman filter than without, although both still have large errors from the observed maximum speed of about 2 m/s.
 
 ![kf velocity](lab07_photos/kf_data_vel.png)
+
+While I ran out of time to try the Kalman Filter on the robot (and would have wanted to tune it more in order for it to be useful), translating the Python code to Arduino wouldn't be difficult:
+
+```cpp
+#include <BasicLinearAlgebra.h>
+using namespace BLA;
+
+Matrix<2,2> A_d = {1, 0.07575758, 0, 0.87540124};
+Matrix<2,1> B_d = {0, 0.33292789};
+Matrix<2,1> C = {-1,0};
+Matrix<2,2> sig_u = {0.132, 0, 0, 0,00132};
+Matrix<1,1> sig_z = {0.000625};
+Matrix<2,2> I_2 = {1,0,0,1};
+
+Matrix<2,1> mu; Matrix<2,2> sigma; // to hold function results, multi return
+
+void compute_kf(Matrix<2,1> mu_prev, Matrix<2,2> sigma_prev, Matrix<1,1> u, Matrix<1,1> y) {
+  Matrix<2,1> mu_p = A_d*mu_prev + B_d*u
+  Matrix<2,2> sigma_p = A*(sigma_prev*~A_d) + sig_u
+
+  Matrix<1,1> y_m = y - (C*mu_p);
+  Matrix<2,2> sigma_m = C*(sigma_p*~C) + sig_z;
+  Matrix<2,1> kkf_gain = sigma_p * (~C*sigma_m.Inverse());
+
+  mu = mu_p + kkf_gain*y_m;
+  sigma = (I_2 - kkf_gain * C) * sigma_p;
+}
+```
