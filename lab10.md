@@ -57,6 +57,38 @@ From the plot, the ground truth (green) suggests that the robot doesn't rotate i
 
 Also, compared to the ground truth (green), the odometry (red) is wildly off. In the real world, this could be explained by ideas like wheel slippage, inconsistencies in wheel diameter, etc. The simulator likely has similar noisiness encoded into it to make the odometry match the real world.
 
+I also know that the real world and the simulated world may have delays between executing a command on a computer and seeing the command being executed on the robot. In that sense, I tried to time how long it would take for a velocity command to execute:
+
+```python
+while cmdr.sim_is_running() and cmdr.plotter_is_running():
+  for i in range(100):
+      time1 = time.time()
+      cmdr.set_vel(0,np.pi/2 * (-1 if i % 2 == 1 else 1))
+      times.append(time.time() - time1)
+  print(f"Average time: {sum(times) / len(times)}")
+  print(f"Std dev: {np.std(times)}")
+```
+```
+Average time: 0.011290438175201416
+Std dev: 0.007699923022536731
+```
+
+I used this code to do this in case the simulator would respond faster to asking it to set the velocity to the same thing all the time. However, I also tried that way and saw a negligible delay reduction:
+
+```python
+while cmdr.sim_is_running() and cmdr.plotter_is_running():
+  for i in range(100):
+      time1 = time.time()
+      cmdr.set_vel(0,1)
+      times.append(time.time() - time1)
+  print(f"Average time: {sum(times) / len(times)}")
+  print(f"Std dev: {np.std(times)}")
+```
+```
+Average time: 0.010912902355194092
+Std dev: 0.00784329388949928
+```
+
 ## Task 3: Closed-Loop Control
 
 To demonstrate closed-loop control, I used the robot's front time-of-flight sensor to determine when the robot should turn away from an obstacle. Initially, I had it turn about 90 degrees; that produced an uninteresting end result, so I had it turn randomly instead.
