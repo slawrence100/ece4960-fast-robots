@@ -17,6 +17,8 @@ I'm running macOS Monterey on an intel-based Mac and nearly everything worked sm
 
 Although I wasn't able to use VSCode like I usually do, I simply started the notebook with the `jupyter notebook` command in the new, activated virtual environment to complete the lab.
 
+As instructed, all of my lab notebooks are in the `notebooks/` directory. You can find all of my lab code on my [Github repo](https://github.com/slawrence100/ece4960-fast-robots-code/tree/main/lab10/ECE4960-sim-release-release-mirror/notebooks). The notebooks are the only thing that had to be modified for this lab.
+
 ## Task 1: Simulator Description
 The simulator includes a GUI to help visualize a robot moving on a map like the one in class and plot where the robot is based on different data sources.
 
