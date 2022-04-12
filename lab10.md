@@ -103,7 +103,13 @@ while cmdr.sim_is_running() and cmdr.plotter_is_running():
         cmdr.set_vel(1, 0)
 ```
 
-From the code above, the robot tries to avoid obstacles as long as they're closer than 30 cm away. Although this seems large, I noticed that when I crashed the robot into a wall head-on, the ToF sensor would still read anything from 9 to 19 cm. The extra 10 cm was designed for padding; if the robot is positioned close enough, it may see a wall much farther than an obstacle it can hit and crash:
+From the code above, the robot tries to avoid obstacles as long as they're closer than 30 cm away. Although this seems large, I noticed that when I crashed the robot into a wall head-on, the ToF sensor would still read anything from 9 to 19 cm. The extra 10 cm was designed for padding; if the robot is positioned close enough, it may see a wall around a corner that one side of the robot would crash into:
+
+![clip corner before](lab10_photos/clip-corner-1.png)
+
+![clip corner after](lab10_photos/clip-corner-2.png)
+
+With this in mind, I tried to get the robot to randomly walk the map. It still crashed sometimes:
 
 ![random walk crash](lab10_photos/random-walk-crash.png)
 
@@ -115,4 +121,6 @@ Although this shows a linear velocity of 1 m/s, I've been able to get to 5 m/s w
 To minimize crashes, there are a few things I can do:
 - **Only turn 180 degrees when an obstacle is found**. Given the map, this would cause the robot to move back and forth along a relatively slim line. Although this avoids crashes, it doesn't let you explore the map.
 - **Make the buffer larger**. I chose a 30 cm buffer, but I definitely could have chosen a larger one to turn earlier. However, there's always a chance the sensor line of sight is very close to a corner in the wall, causing the robot to crash because it collides with the corner. A buffer that's too large may also cause the robot to spin in circles, which also limits map exploration.
-
+- **"Wiggle" to compensate for the robot width**. In theory, the robot could spin side-to-side and take the minimum distance reading in order to assure that the entire path that its width would take up would be clear. However, this is more complicated by...
+  -  How far the robot may need to go: farther points mean less of an angle change is needed to assure crash avoidance
+  - The sampling rate: The robot needs to turn side-to-side in a way that's slow enough for the sensor to guarantee that the path is clear.
