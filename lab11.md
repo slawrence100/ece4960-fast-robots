@@ -2,7 +2,7 @@
 title: Lab 11
 ---
 
-# Lab 11: Bayes Filter (in simulatoin)
+# Lab 11: Bayes Filter (in simulation)
 
 [Click here to return to home page](https://slawrence100.github.io/ece4960-fast-robots/)
 
