@@ -51,4 +51,21 @@ You may notice that the `sudden_flip()` function has an option to scale. This re
 [![Flip 2](http://img.youtube.com/vi/BNiTNU1MDY0/0.jpg)](http://www.youtube.com/watch?v=BNiTNU1MDY0)
 
 ## Open-Loop Stunts
-TODO add this part - extension policy says I have until April 5th at 8 AM ET to do so
+
+I originally planned to try to get my robot to parallel park. After trying a few times and seeing some reliability issues with getting into a specific spot, I tried to increase reliability by removing the tape attached to the wheels that I used before when trying to get the robot to spin on its axis easier.
+
+However, the glue remover I needed to remove the adhesive from the wheels had the unintended side effect of making the table and wheels slippery! That led to my open-loop stunt: The Parking Drift!
+
+[![The parking drift video](http://img.youtube.com/vi/XlI2pmH9c3A/0.jpg)](http://www.youtube.com/watch?v=XlI2pmH9c3A)
+
+The controls I used for this are listed below:
+```python
+bot.move_duration(100,500) # 100 power, 500 ms
+bot.spin(80,-80,900) # 80 L, -80 R, 900 ms
+bot.move_duration(100,1800)
+bot.spin(100,80,500)
+```
+
+This also took a few tries to perfect, which brought rise to this bloopers video:
+
+[![The parking drift blooper video](http://img.youtube.com/vi/nqheZMJb8gQ/0.jpg)](http://www.youtube.com/watch?v=nqheZMJb8gQ)
