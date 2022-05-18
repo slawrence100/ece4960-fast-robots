@@ -96,6 +96,10 @@ The results came out well; my robot could now cross the line more clearly.
 
 [![Time-based flip](http://img.youtube.com/vi/2f7QRdYa53U/0.jpg)](http://www.youtube.com/watch?v=2f7QRdYa53U)
 
+![Time-based flip graph, TOF](lab08_photos/better-flips/run1_tof.png)
+
+![Sensor-based flip graph, P-control](lab08_photos/better-flips/run1_pid.png)
+
 ### Sensor-Based Stunt
 Now that I had gotten a better time-based stunt, I wanted to see if P-control could help me more. This caused me to write code for a sensor-based flip:
 
@@ -138,7 +142,11 @@ The results came out much better than my previous trials where I essentially aba
 
 [![Sensor-based flip](http://img.youtube.com/vi/WUa14akPy8o/0.jpg)](http://www.youtube.com/watch?v=WUa14akPy8o)
 
-TODO add graphs
+![Sensor-based flip graph, TOF](lab08_photos/better-flips/run5_tof.png)
+
+![Sensor-based flip graph, P-control](lab08_photos/better-flips/run5_pid.png)
+
+The large spike in the ToF graph comes from the noise from flipping and trying to see a distance that's too far for the sensor to reach, as well as my hand moving in to grab the robot off the floor after the flip is over.
 
 ## Open-Loop Stunts
 
