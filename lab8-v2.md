@@ -18,6 +18,8 @@ The codebase I developed in labs 12 and onward felt much cleaner than my origina
 ### Moving forward with P-control
 Lab 12 taught me a better way to organize my code for P-controlled movement. Instead of making a messy main loop, I put all my PID code into a blocking function. It also pings the bluetooth device occasionally in order to avoid disconnecting; although that may have some small impacts on sensor reading frequency, it was better than having a robot only complete part of the maneuver before disconnecting.
 
+You can view the full code on [my GitHub repo](https://github.com/slawrence100/ece4960-fast-robots-code/tree/main/lab08_redo).
+
 ```cpp
 void move_distance(int dist) {
   int tof_dist = get_tof_measurement(distanceSensorTwo, 5); // average of 5 tries
