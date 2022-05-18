@@ -101,6 +101,13 @@ The results came out well; my robot could now cross the line more clearly.
 
 ![Sensor-based flip graph, P-control](lab08_photos/better-flips/run1_pid.png)
 
+Other parameters:
+- Forward motor power: 170
+- Forward runtime: 900 ms
+- Backward motor power: 255
+- Backward runtime: 1000 ms
+- Motor calibration factor: 1.3 (i.e. the left motor is 1.3x as fast as the right motor)
+
 ### Sensor-Based Stunt
 Now that I had gotten a better time-based stunt, I wanted to see if P-control could help me more. This caused me to write code for a sensor-based flip:
 
@@ -147,7 +154,15 @@ The results came out much better than my previous trials where I essentially aba
 
 ![Sensor-based flip graph, P-control](lab08_photos/better-flips/run5_pid.png)
 
+Other parameters:
+- P-control constant: 0.4
+- P-control min power: 35
+- P-control setpoint: 870 mm
+- Motor calibration factor: 1.3 (i.e. the left motor is 1.3x as fast as the right motor)
+
 The large spike in the ToF graph comes from the noise from flipping and trying to see a distance that's too far for the sensor to reach, as well as my hand moving in to grab the robot off the floor after the flip is over.
+
+The P-control setpoint also seems higher than the video would suggest, but that largeness used to compensate for the slow frequency of the ToF sensor.
 
 ## Open-Loop Stunts
 
