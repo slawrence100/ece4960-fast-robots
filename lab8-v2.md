@@ -44,7 +44,6 @@ void move_distance(int dist) {
     }
   }
 }
-}
 ```
 
 ### Time-Based Stunt
