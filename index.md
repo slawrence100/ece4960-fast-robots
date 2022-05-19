@@ -7,22 +7,23 @@ This page describes myself and my lab work and ECE 4960: Fast Robots.
 Click on a link to learn more.
 
 ## New Pages
+
+[Lab 13](https://slawrence100.github.io/ece4960-fast-robots/lab13)
+
 [Lab 8, redone](https://slawrence100.github.io/ece4960-fast-robots/lab8-v2)
 
 [Lab 12](https://slawrence100.github.io/ece4960-fast-robots/lab11)
 
 [Lab 11](https://slawrence100.github.io/ece4960-fast-robots/lab11)
 
-[Lab 10](https://slawrence100.github.io/ece4960-fast-robots/lab10)
-
-[Lab 9](https://slawrence100.github.io/ece4960-fast-robots/lab9)
-
-
-
 
 ## Past Pages
 
 [About me](https://slawrence100.github.io/ece4960-fast-robots/about)
+
+[Lab 10](https://slawrence100.github.io/ece4960-fast-robots/lab10)
+
+[Lab 9](https://slawrence100.github.io/ece4960-fast-robots/lab9)
 
 [Lab 8](https://slawrence100.github.io/ece4960-fast-robots/lab8)
 
