@@ -10,7 +10,7 @@ Click on a link to learn more.
 
 [Lab 13](https://slawrence100.github.io/ece4960-fast-robots/lab13)
 
-[Lab 12](https://slawrence100.github.io/ece4960-fast-robots/lab11)
+[Lab 12](https://slawrence100.github.io/ece4960-fast-robots/lab12)
 
 [Lab 11](https://slawrence100.github.io/ece4960-fast-robots/lab11)
 
